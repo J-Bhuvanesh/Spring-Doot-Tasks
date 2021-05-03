@@ -17,7 +17,7 @@ import javax.validation.constraints.Size;
 
 
 @Entity
-@Table(name="PRODUCT_TABLE",
+@Table(name="PRODUCT",
 uniqueConstraints=@UniqueConstraint(name="uk_PRODUCT_TABLE_product_model",
 columnNames = { "product_model" }),
 indexes=@Index(name=("idx_PRODUCT_TABLE_id_name_product_model_quantity_price"),
@@ -34,7 +34,16 @@ public class Product {
 	@NotNull
 	@Size(min=3,max=10,message="enter valid product_model number")
 	private String product_model;
-
+	public Product() {}
+	public Product( String name,
+	String product_model,int quantity,
+			double price) {
+		super();
+		this.name = name;
+		this.product_model = product_model;
+		this.quantity = quantity;
+		this.price = price;
+	}
 	public String getProduct_model() {
 		return product_model;
 	}
