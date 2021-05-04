@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Validation.entity.Product;
@@ -36,12 +37,12 @@ public class ProductController {
 	public List<Product> findAllProducts(){
 		return service.getProducts();
 	}
-	@GetMapping("/productbyid/{id}")
-	public Product findAllProductsById(@PathVariable int id){
+	@GetMapping("/productbyid/id")
+	public Product findAllProductsById(@RequestParam String id){
 		return service.getProductById(id);
 	}
-	@GetMapping("/product/{name}")
-	public Product findAllProductsByName(@PathVariable String name){
+	@GetMapping("/product/name")
+	public Product findAllProductsByName(@RequestParam String name){
 		return service.getProductByName(name);
 	}
 	@PutMapping("/update")

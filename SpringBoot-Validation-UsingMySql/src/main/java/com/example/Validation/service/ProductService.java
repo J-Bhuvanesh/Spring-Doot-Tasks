@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.Validation.entity.Product;
+import com.example.Validation.exception.EmptyInputException;
+import com.example.Validation.exception.NoSuchIdFountException;
 import com.example.Validation.repository.ProductRepository;
 
 
@@ -25,10 +27,18 @@ public class ProductService {
 	public List<Product> getProducts(){
 		return repository.findAll();
 	}
-	public Product getProductById(int id){
-		return repository.findById(id).orElse(null);
-	}
+	public Product getProductById(String id){
+		
+		if(id.isEmpty()) {
+			throw new NoSuchIdFountException("398","input field id is empty");
+		}
+		return repository.findById(Integer.valueOf(id)).orElseThrow(null);
+	
+		}
 	public Product getProductByName(String name){
+		if(name.isEmpty()) {
+			throw new EmptyInputException("399","input field name is empty");
+		}
 		return repository.findByName(name);
 	}
 	public String deleteProduct(int id) {
